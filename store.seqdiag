@@ -1,0 +1,5 @@
+Title: Store Configuration
+UI->AddItem: Dispatch actions
+AddItem ->>store: Reducer function () => {}
+store -> selector: 
+selector --> UI:
