@@ -10,19 +10,19 @@ import { addItem } from "../utils/cartSlice";
 function RestaurantMenu() {
   const { resId } = useParams();
   const restaurant = useRestaurant(resId);
-  // const [categories, setCatogories] = useState(null);
+  const [categories, setCatogories] = useState(null);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   getC();
-  // }, []);
+  useEffect(() => {
+    getC();
+  }, [restaurant]);
 
-  // const getC = () => {
-  //   const output = Object.values(restaurant?.menu?.items).map(
-  //     (v) => v.category
-  //   );
-  //   setCatogories(output);
-  // };
+  const getC = () => {
+    const output = restaurant && Object.values(restaurant?.menu?.items).map(
+      (v) => v.category
+    );
+    setCatogories([...new Set(output)]);
+  };
 
   const handleAdd = item => {
     dispatch(addItem(item));
@@ -64,6 +64,8 @@ function RestaurantMenu() {
         </div>
       </div>
     ));
+
+    const menuTab = categories && categories.map((category) => <li className=" m-1 py-1 px-3 bg-[#00c575] border rounded-md">{category}</li>)
   return !restaurant ? (
     <CardShimmer />
   ) : (
@@ -86,13 +88,14 @@ function RestaurantMenu() {
           <h3 className="text-md font-regular">{restaurant?.costForTwoMsg}</h3>
         </div>
       </div>
-      <div className="w-1/2 mx-auto">
         <h1 data-testid="menuTitle">Menu</h1>
+        <ul className=" flex flex-wrap justify-center w-3/4 my-1 mx-auto text-xs ">
+          {menuTab}
+        </ul>
         <div data-testid="menu">
         {_menu}
         </div>
       </div>
-    </div>
   );
 }
 
