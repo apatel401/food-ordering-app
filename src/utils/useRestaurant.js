@@ -1,19 +1,20 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 
 export default function useRestaurant(resId) {
-    const [restaurant, setRestaurant] = useState(null);
+  const [restaurant, setRestaurant] = useState(null);
 
-    useEffect(() => {
-        getRestaurantMenu();
-      }, []);
-    
-      const getRestaurantMenu = async () => {
-        const data = await fetch(
-          `https://www.swiggy.com/dapi/menu/v4/full?lat=12.9351929&lng=77.62448069999999&menuId=${resId}`
-        );
-        const json = await data.json();
-        setRestaurant(json?.data);
-      };
+  useEffect(() => {
+    getRestaurantMenu();
+  }, []);
 
-  return restaurant
+  const getRestaurantMenu = async () => {
+    const data = await fetch(
+      `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=23.022505&lng=72.5713621&restaurantId=${resId}`
+    );
+
+    const json = await data.json();
+    setRestaurant(json?.data);
+  };
+
+  return restaurant;
 }
