@@ -14,10 +14,10 @@ function RestaurantCard({
     <div className="w-52 hover:rounded-2xl">
       <img src={IMG_CDN_URL + cloudinaryImageId} className="w-full h-48 object-cover rounded-2xl" />
       <div className="m-1">
-      <h2 className="font-semibold text-md">{name}</h2>
-      <h3 className="font-normal text-sm mb-2 min-h-[60px]">
-        {cuisines.join(", ")}
-      </h3>
+      <div className={name.length > 25 && "movingText"}><p className="font-semibold text-md">{name}</p></div>
+      <div className={`"font-normal text-sm mb-2 min-h-[60px]" ${cuisines.join(", ").length > 35 && "movingText"}`}>
+        <p>{cuisines.join(", ")}</p>
+      </div>
       <div className="flex justify-between">
         <h4
           className={`font-semibold text-xs text-white inline-flex py-0.5 px-2 ${

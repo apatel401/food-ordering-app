@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
-// import "./app.css";
+import "./app.css";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import  store  from './utils/store'
 import { Provider } from 'react-redux'
