@@ -10,9 +10,9 @@ import { addItem } from "../utils/cartSlice";
 function RestaurantMenu() {
   const { resId } = useParams();
   const restaurantDetails = useRestaurant(resId);
-  const restaurant = restaurantDetails?.cards[0]?.card?.card?.info;
+  const restaurant = restaurantDetails?.cards[2]?.card?.card?.info;
   const restaurantMenu =
-    restaurantDetails?.cards[2].groupedCard.cardGroupMap.REGULAR.cards[4].card
+    restaurantDetails?.cards[4].groupedCard.cardGroupMap.REGULAR.cards[4].card
       .card.itemCards;
   const [categories, setCatogories] = useState(null);
   const dispatch = useDispatch();

@@ -16,16 +16,29 @@ function Body() {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
+    console.log(json)
+    let changingAPI = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     //updated API Call as per live data
-    setRestaurantData(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilterRestaurantData(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    //added condition in case of change of api data sequence
+    if(changingAPI) {
+      setRestaurantData(
+        changingAPI
+      );
+      setFilterRestaurantData(
+        changingAPI
+      );
+    } else {
+      setRestaurantData(
+        json?.data?.cards[Math.floor(Math.random() * 10)]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      );
+      setFilterRestaurantData(
+        json?.data?.cards[Math.floor(Math.random() * 10)]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      );
+    }
+   
   }
 
   if (!isOnline) {
@@ -70,7 +83,7 @@ function Body() {
         </div>
       </div>
       <div
-        className="flex flex-wrap justify-center mt-5"
+        className="flex flex-wrap justify-center mt-5 gap-4"
         data-testid="rest-list"
       >
         {filterRestaurantData.length === 0 ? (
@@ -81,7 +94,7 @@ function Body() {
               <Link
                 key={index}
                 to={`/restaurant/${restaurant.info.id}`}
-                className="hover:cursor-pointer hover:shadow-lg"
+                className="hover:cursor-pointer hover:shadow-lg hover:scale-105 hover:transition-all hover:rounded-2xl"
               >
                 <RestaurantCard {...restaurant.info} />
               </Link>

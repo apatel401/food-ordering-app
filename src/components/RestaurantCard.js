@@ -6,15 +6,14 @@ function RestaurantCard({
   name,
   cuisines,
   cloudinaryImageId,
-  deliveryTime,
   costForTwo,
   avgRating,
-}) {
+  ...props}) {
   const avgRatingDecimal = Math.round(avgRating * 10) / 10;
-
   return (
-    <div className="w-52 m-2.5 p-2.5">
-      <img src={IMG_CDN_URL + cloudinaryImageId} />
+    <div className="w-52 hover:rounded-2xl">
+      <img src={IMG_CDN_URL + cloudinaryImageId} className="w-full h-48 object-cover rounded-2xl" />
+      <div className="m-1">
       <h2 className="font-semibold text-md">{name}</h2>
       <h3 className="font-normal text-sm mb-2 min-h-[60px]">
         {cuisines.join(", ")}
@@ -28,11 +27,12 @@ function RestaurantCard({
           <BiStar className="h-4 mr-0.5" /> {avgRatingDecimal}
         </h4>
         <h4 className="text-xs text-black flex font-normal py-0.5">
-          {deliveryTime} min
+          {props.sla.deliveryTime} min
         </h4>
         <h4 className="text-xs text-black flex font-normal py-0.5">
           <BiRupee className="h-4 mr-0.5" /> {costForTwo}
         </h4>
+      </div>
       </div>
     </div>
   );

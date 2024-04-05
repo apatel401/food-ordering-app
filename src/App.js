@@ -4,7 +4,6 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import  store  from './utils/store'
 import { Provider } from 'react-redux'
-import userConfig from "./components/Context";
 
 import Body from "./components/Body";
 import Footer from "./components/Footer";
@@ -77,8 +76,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
-  <userConfig.Provider>
     <RouterProvider router={router} />
-  </userConfig.Provider>
   </Provider>
 );

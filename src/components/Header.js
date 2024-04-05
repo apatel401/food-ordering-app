@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import logo from "../assets/ap-logo-1.png";
 import { BiFoodMenu, BiCart, BiNotepad, BiCaretDown } from "react-icons/bi";
 import { FaRegUser } from "react-icons/fa";
-import userConfig from "./Context"
 import { useSelector } from "react-redux";
 import useOnline from "../utils/useOnline"
 const Header = ({ loggedIn, setLoggedIn }) => {
-  const config = useContext(userConfig);
   const cartItems = useSelector(store => store.cart.items)
  const isOnline = useOnline()
   return (
